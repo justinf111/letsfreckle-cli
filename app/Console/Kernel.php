@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\FreckleEntry::class,
+        \App\Console\Commands\FreckleAddEntry::class,
         \App\Console\Commands\FreckleUpdateEntry::class,
         \App\Console\Commands\FreckleDeleteEntry::class,
     ];

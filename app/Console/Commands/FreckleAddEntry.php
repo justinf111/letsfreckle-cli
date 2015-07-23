@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
-class FreckleEntry extends Freckle
+class FreckleAddEntry extends Freckle
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'entry';
+    protected $signature = 'add-entry';
 
     /**
      * The console command description.
