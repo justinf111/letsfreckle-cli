@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\FreckleEntry::class,
+        \App\Console\Commands\FreckleUpdateEntry::class,
+        \App\Console\Commands\FreckleDeleteEntry::class,
     ];
 
     /**

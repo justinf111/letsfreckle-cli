@@ -2,11 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Services\FreckleApi;
-
-
-class FreckleEntry extends Command
+class FreckleEntry extends Freckle
 {
     /**
      * The name and signature of the console command.
@@ -29,18 +25,20 @@ class FreckleEntry extends Command
      */
     public function handle()
     {
-        $freakleApi = new FreckleApi();
-        $projects = $freakleApi->listProjects();
-        $projectList = [];
-        foreach($projects as $project) {
-            $projectList[] = $project->name;
-        }
-        $name = $this->choice('What project are you working on?', $projectList, false);
-        $minutes = $this->ask('How long have you worked on this project for (HH:MM)?');
+        $name = $this->choice('What project are you working on?', $this->prepareProjectList(), false);
+        $time = $this->ask('How long have you worked on this project for (HH:MM)?');
+
+        $minutes = $this->converter->toMinutes($time);
+
         $description = $this->ask('Please write a description for this entry.');
 
         if($this->confirm('You have worked on '.$name.' for '.$minutes.' doing '.$description.'. Do you wish to submit this entry? [yes|no]')) {
-            $freakleApi->submitEntry($name, $minutes, $description);
+            $this->freckleApi->submitEntry($name, $minutes, $description);
         }
+
+        $totalHours = $this->converter->toHoursAndMinutes($this->freckleApi->getTotalHours(), $this->format);
+        $this->comment($totalHours);
+
+        $this->makeNextDecision();
     }
 }
