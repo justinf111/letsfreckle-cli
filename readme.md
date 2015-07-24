@@ -8,16 +8,20 @@ You will need to add both your freckle token and userId. You can get your freckl
 
 ### Add Entry
 
-'''
+```
 php artisan add-entry
-'''
+```
+
 ### Edit Entry
 
+```
 php artisan update-entry
+```
 
 ### Delete Entry
 
+```
 php artisan delete-entry
-
+```
 
 
