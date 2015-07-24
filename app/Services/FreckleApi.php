@@ -42,11 +42,12 @@ class FreckleApi {
         return $result;
     }
 
-    public function editEntry($id, $minutes, $description) {
+    public function editEntry($id, $projectName, $minutes, $description) {
 
         $data = [
             'minutes' => $minutes,
             'description' => $description,
+            'project_name' => $projectName
         ];
 
         $result = $this->request('entries/'.$id, 'put', [], $data);

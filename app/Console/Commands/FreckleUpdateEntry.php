@@ -36,6 +36,7 @@ class FreckleUpdateEntry extends Freckle
             $name = $this->choice('Which entry do you want to edit?', $this->prepareEntryList(), false);
 
             $selectedEntry = $this->getSelectedEntry($entries, $name);
+            $projectName = $this->choice('Which project were you working on?' , $this->prepareProjectList(), false);
             $time = $this->ask('How long have you worked on this project for (HH:MM)?', $selectedEntry->minutes);
 
             $minutes = $this->converter->toMinutes($time);
@@ -43,7 +44,7 @@ class FreckleUpdateEntry extends Freckle
             $description = $this->ask('Please write a description for this entry.');
 
             if($this->confirm('You have worked on '.$name.' for '.$minutes.' doing '.$description.'. Do you wish to update this entry? [yes|no]')) {
-                $this->freckleApi->editEntry($selectedEntry->id, $minutes, $description);
+                $this->freckleApi->editEntry($selectedEntry->id, $projectName, $minutes, $description);
             }
 
             $totalHours = $this->converter->toHoursAndMinutes($this->freckleApi->getTotalHours(), $this->format);
